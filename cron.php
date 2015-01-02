@@ -6,7 +6,7 @@
  * @version  1.0.0
  */
 
-require __DIR__.'../../../cron/base.php';
+require dirname(dirname(dirname(__DIR__))) . '/cron/base.php';
 
 $porter = \Plugin\Porter\Base::instance();
 $porter->run();
