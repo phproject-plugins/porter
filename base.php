@@ -62,32 +62,32 @@ class Base extends \Plugin {
 		}
 
 		// Clean up database
-		$row = $db->exec("UPDATE issue SET parent_id = NULL WHERE parent_id = '0'");
+		$rows = $db->exec("UPDATE issue SET parent_id = NULL WHERE parent_id = '0'");
 		if($debug) {
 			$log->write("Fixed parent_id on {$rows} issues");
 		}
 
-		$row = $db->exec("UPDATE issue SET closed_date = NULL WHERE closed_date = '0000-00-00 00:00:00'");
+		$rows = $db->exec("UPDATE issue SET closed_date = NULL WHERE closed_date = '0000-00-00 00:00:00'");
 		if($debug) {
 			$log->write("Fixed closed_date on {$rows} issues");
 		}
 
-		$row = $db->exec("UPDATE issue SET deleted_date = NULL WHERE deleted_date = '0000-00-00 00:00:00'");
+		$rows = $db->exec("UPDATE issue SET deleted_date = NULL WHERE deleted_date = '0000-00-00 00:00:00'");
 		if($debug) {
 			$log->write("Fixed deleted_date on {$rows} issues");
 		}
 
-		$row = $db->exec("UPDATE issue SET repeat_cycle = '' WHERE repeat_cycle = 'none'");
+		$rows = $db->exec("UPDATE issue SET repeat_cycle = '' WHERE repeat_cycle = 'none'");
 		if($debug) {
 			$log->write("Cleaned repeat_cycle on {$rows} issues");
 		}
 
-		$row = $db->exec("UPDATE user SET api_key = NULL WHERE api_key = ''");
+		$rows = $db->exec("UPDATE user SET api_key = NULL WHERE api_key = ''");
 		if($debug) {
 			$log->write("Cleaned api_key on {$rows} users");
 		}
 
-		$row = $db->exec("DELETE FROM session WHERE stamp < UNIX_TIMESTAMP() - ?", $f3->get("JAR.expire"));
+		$rows = $db->exec("DELETE FROM session WHERE stamp < UNIX_TIMESTAMP() - ?", $f3->get("JAR.expire"));
 		if($debug) {
 			$log->write("Deleted {$rows} old sessions");
 		}
