@@ -1,7 +1,7 @@
 <check if="{{ !empty(@POST.run) }}">
 	<p class="alert alert-success">Porter ran successfully!</p>
 </check>
-<form action="admin/plugins/{{ @PARAMS.id }}" method="post">
+<form action="{{ @site.url }}admin/plugins/{{ @PARAMS.id }}" method="post">
 	<input type="hidden" name="run" value="1">
 	<p><button type="submit" class="btn btn-success btn-xs">Run Now</button>&ensp;Porter will purge deleted attachments and fix database inconsistencies.</p>
 </form>
