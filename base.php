@@ -32,8 +32,8 @@ class Base extends \Plugin {
 		if($f3->get("POST.run")) {
 			$this->run();
 		}
-		$f3->set("UI", $f3->get("UI") . ";./app/plugin/porter/");
-		echo \Helper\View::instance()->render("view/admin.html");
+		$f3->set("UI", $f3->get("UI") . ";./app/plugin/porter/view/");
+		echo \Helper\View::instance()->render("porter-admin.html");
 	}
 
 	/**
