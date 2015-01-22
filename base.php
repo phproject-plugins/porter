@@ -51,7 +51,12 @@ class Base extends \Plugin {
 		$file = new \Model\Issue\File;
 		$files = $file->find("deleted_date IS NOT NULL AND deleted_date < DATE_SUB(NOW(), INTERVAL 1 DAY)");
 		foreach($files as $f) {
+			if(!$f->disk_filename) {
+				continue;
+			}
 			$result = @unlink($f->disk_filename);
+			$f->disk_filename = '';
+			$f->save();
 			if($debug) {
 				if($result) {
 					$log->write("Deleted " . $f->disk_filename);
