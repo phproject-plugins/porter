@@ -55,8 +55,6 @@ class Base extends \Plugin {
 				continue;
 			}
 			$result = @unlink($f->disk_filename);
-			$f->disk_filename = '';
-			$f->save();
 			if($debug) {
 				if($result) {
 					$log->write("Deleted " . $f->disk_filename);
@@ -64,6 +62,8 @@ class Base extends \Plugin {
 					$log->write("Failed to delete " . $f->disk_filename);
 				}
 			}
+			$f->disk_filename = '';
+			$f->save();
 		}
 
 		// Clean up database
