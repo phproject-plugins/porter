@@ -32,8 +32,8 @@ class Base extends \Plugin {
 		if($f3->get("POST.run")) {
 			$this->run();
 		}
-		$f3->set("UI", $f3->get("UI") . ";./app/plugin/porter/");
-		echo \Helper\View::instance()->render("view/admin.html");
+		$f3->set("UI", $f3->get("UI") . ";./app/plugin/porter/view/");
+		echo \Helper\View::instance()->render("porter-admin.html");
 	}
 
 	/**
@@ -51,6 +51,9 @@ class Base extends \Plugin {
 		$file = new \Model\Issue\File;
 		$files = $file->find("deleted_date IS NOT NULL AND deleted_date < DATE_SUB(NOW(), INTERVAL 1 DAY)");
 		foreach($files as $f) {
+			if(!$f->disk_filename) {
+				continue;
+			}
 			$result = @unlink($f->disk_filename);
 			if($debug) {
 				if($result) {
@@ -59,6 +62,8 @@ class Base extends \Plugin {
 					$log->write("Failed to delete " . $f->disk_filename);
 				}
 			}
+			$f->disk_filename = '';
+			$f->save();
 		}
 
 		// Clean up database
