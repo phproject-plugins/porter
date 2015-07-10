@@ -3,7 +3,8 @@
 </check>
 <form action="{{ @site.url }}admin/plugins/{{ @PARAMS.id }}" method="post">
 	<input type="hidden" name="run" value="1">
-	<p><button type="submit" class="btn btn-success btn-xs">Run Now</button>&ensp;Porter will purge deleted attachments and fix database inconsistencies.</p>
+	<p><button type="submit" class="btn btn-success btn-sm">Run Now</button>&emsp;Porter will purge deleted attachments and fix database inconsistencies.</p>
 </form>
-<br>
+<hr>
+<h4>Scheduled runs</h4>
 <p>To schedule Porter to run at specific times, add a <a href="http://en.wikipedia.org/wiki/Cron">crontab</a> entry pointing to <code>app/plugins/porter/cron.php</code>, running as frequently as you desire.</p>
