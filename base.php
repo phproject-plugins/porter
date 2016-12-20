@@ -49,7 +49,7 @@ class Base extends \Plugin {
 
 		// Purge deleted files
 		$file = new \Model\Issue\File;
-		$files = $file->find("deleted_date IS NOT NULL AND deleted_date < DATE_SUB(NOW(), INTERVAL 1 DAY)");
+		$files = $file->find("deleted_date IS NOT NULL AND deleted_date < DATE_SUB(NOW(), INTERVAL 5 DAY)");
 		foreach($files as $f) {
 			if(!$f->disk_filename) {
 				continue;
@@ -82,7 +82,7 @@ class Base extends \Plugin {
 			$log->write("Fixed deleted_date on {$rows} issues");
 		}
 
-		$rows = $db->exec("UPDATE issue SET repeat_cycle = '' WHERE repeat_cycle = 'none'");
+		$rows = $db->exec("UPDATE issue SET repeat_cycle = NULL WHERE repeat_cycle = 'none'");
 		if($debug) {
 			$log->write("Cleaned repeat_cycle on {$rows} issues");
 		}
