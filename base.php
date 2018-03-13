@@ -92,7 +92,7 @@ class Base extends \Plugin {
 			$log->write("Cleaned api_key on {$rows} users");
 		}
 
-		$rows = $db->exec("DELETE FROM session WHERE created < ?", date("Y-m-d H:i:s", time() - $f3->get("JAR.expire")));
+		$rows = $db->exec("DELETE FROM session WHERE created < ?", date("Y-m-d H:i:s", time() - $f3->get("session_lifetime")));
 		if($debug) {
 			$log->write("Deleted {$rows} old sessions");
 		}
